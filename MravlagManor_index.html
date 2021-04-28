@@ -11,7 +11,7 @@
           width: 100%;
         }
       </style>
-      <link rel="stylesheet" href="https://js.arcgis.com/4.19esri/themes/light/main.css">
+      <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/dark/main.css">
       <script src="https://js.arcgis.com/4.19"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
@@ -19,6 +19,28 @@
 
     </head>
     <body>
-      <div id="viewDiv"></div>
+      <div id="viewDiv">
+        <div id="menu" class="esri-widget">
+          <div id="sliceContainer"></div>
+          <div id="sliceOptions">
+            <button
+              class="esri-button esri-button--secondary"
+              id="resetPlaneBtn"
+              type="button"
+              title="Reset slice plane">
+              Reset slice plane
+            </button>
+            <button
+              class="esri-button esri-button--secondary"
+              id="clearPlaneBtn"
+              type="button"
+              title="Clear slice plane">
+              Clear slice
+            </button>
+            <input type="checkbox" id="tiltEnabled" checked /><label
+              for="tiltEnabled">Allow tilt on slice plane</label>
+          </div>
+        </div>
+      </div>
     </body>
     </html>

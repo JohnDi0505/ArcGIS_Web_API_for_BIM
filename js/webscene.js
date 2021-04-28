@@ -25,7 +25,7 @@ function scene_display() {
         // Load webscene and display it in a SceneView
         const webscene = new WebScene({
           portalItem: {
-            id: "c7470b0e4e4c44288cf287d658155300"
+            id: "6048eb1a3d2c4798ac36a831c2857664"
           }
         });
   
@@ -42,28 +42,35 @@ function scene_display() {
         });
         webscene.layers.add(buildingLayer);
   
+        sliceWidget = new Slice({
+          view: view,
+          container: document.createElement("div")
+        });
+
+        view.ui.add("menu", "top-right");
+
         const excludedLayers = [];
+
+        sliceWidget.viewModel.excludedLayers.addMany(excludedLayers);
         const sliceButton = document.getElementById("slice");
         const resetPlaneBtn = document.getElementById("resetPlaneBtn");
         const clearPlaneBtn = document.getElementById("clearPlaneBtn");
         const sliceOptions = document.getElementById("sliceOptions");
+
         const plane = new SlicePlane({
           position: {
-            latitude: 34.0600460070941,
-            longitude: -117.18669237418565,
-            z: 417.75
+            latitude: 40.64681223094478,
+            longitude: -74.21318257215083,
+            z: 400
           },
           tilt: 32.62,
           width: 29,
           height: 29,
           heading: 0.46
         });
-        let sliceWidget = null;
-        let doorsLayer = null;
+
         let sliceTiltEnabled = true;
-  
-        view.ui.add("menu", "top-right");
-  
+
         buildingLayer.when(() => {
           // Iterate through the flat array of sublayers and extract the ones
           // that should be excluded from the slice widget
@@ -77,14 +84,6 @@ function scene_display() {
                 layer.visible = true;
                 break;
               case "Overview":
-              case "Rooms":
-                layer.visible = false;
-                break;
-              // Extract the layers that should not be hidden by the slice widget
-              case "Doors":
-                doorsLayer = layer;
-                excludedLayers.push(layer);
-                break;
               default:
                 layer.visible = true;
             }
@@ -92,13 +91,12 @@ function scene_display() {
   
           setSliceWidget();
         });
-  
+
         function setSliceWidget() {
           sliceWidget = new Slice({
             view: view,
             container: "sliceContainer"
           });
-          sliceWidget.viewModel.excludedLayers.addMany(excludedLayers);
           sliceTiltEnabled = true;
           sliceWidget.viewModel.tiltEnabled = sliceTiltEnabled;
           sliceWidget.viewModel.shape = plane;
@@ -110,14 +108,14 @@ function scene_display() {
             }
           });
         }
-  
+
         resetPlaneBtn.addEventListener("click", () => {
           document.getElementById("tiltEnabled").checked = true;
           sliceTiltEnabled = true;
           sliceWidget.viewModel.tiltEnabled = sliceTiltEnabled;
           sliceWidget.viewModel.shape = plane;
         });
-  
+
         clearPlaneBtn.addEventListener("click", () => {
           sliceWidget.viewModel.clear();
         });
@@ -128,36 +126,5 @@ function scene_display() {
             sliceTiltEnabled = event.target.checked;
             sliceWidget.viewModel.tiltEnabled = sliceTiltEnabled;
           });
-  
-        document
-          .getElementById("color")
-          .addEventListener("change", (event) => {
-            if (event.target.checked) {
-              // A renderer can be set on a BuildingComponentSublayer
-              doorsLayer.renderer = {
-                type: "simple", // autocasts as new UniqueValueRenderer()
-                symbol: {
-                  type: "mesh-3d", // autocasts as new MeshSymbol3D()
-                  symbolLayers: [
-                    {
-                      type: "fill", // autocasts as new FillSymbol3DLayer()
-                      material: {
-                        color: "red"
-                      }
-                    }
-                  ]
-                }
-              };
-            } else {
-              doorsLayer.renderer = null;
-            }
-          });
-  
-        // Add a layer list widget
-        const layerList = new LayerList({
-          view: view
-        });
-        view.ui.empty("top-left");
-        view.ui.add(layerList, "top-left");
-      });
+    });
 }
