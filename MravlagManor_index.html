@@ -12,10 +12,12 @@
         }
       </style>
       <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/dark/main.css">
+      <link rel="stylesheet" href="static/css/MravlagManor_index.css">
       <script src="https://js.arcgis.com/4.19"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
-      <script src="js/webscene.js"></script>
+      <script src="static/js/webscene.js"></script>
+      <script src="static/js/dashboard.js"></script>
 
     </head>
     <body>
@@ -37,10 +39,18 @@
               title="Clear slice plane">
               Clear slice
             </button>
+            <button
+              class="esri-button esri-button--secondary"
+              id="dashboardSwitch"
+              type="button"
+              title="Dashboard">
+              Dashboard
+            </button>
             <input type="checkbox" id="tiltEnabled" checked /><label
               for="tiltEnabled">Allow tilt on slice plane</label>
           </div>
         </div>
       </div>
+      <div id="dashboard"></div>
     </body>
     </html>

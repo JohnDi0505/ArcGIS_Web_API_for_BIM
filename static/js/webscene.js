@@ -49,9 +49,9 @@ function scene_display() {
 
         view.ui.add("menu", "top-right");
 
-        const excludedLayers = [];
+        // const excludedLayers = [];
 
-        sliceWidget.viewModel.excludedLayers.addMany(excludedLayers);
+        // sliceWidget.viewModel.excludedLayers.addMany(excludedLayers);
         const sliceButton = document.getElementById("slice");
         const resetPlaneBtn = document.getElementById("resetPlaneBtn");
         const clearPlaneBtn = document.getElementById("clearPlaneBtn");
