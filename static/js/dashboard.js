@@ -1,3 +1,5 @@
+var SwitchState = 0;
+
 $(document).ready(function(){
     $.ajax({
         async:false, dataType:"json",
@@ -6,7 +8,19 @@ $(document).ready(function(){
             dashboard(data);
         }
     });
+
 });
+
+function DashboardSwitch () {
+    if (SwitchState) {
+        $("#dashboard").hide();
+        SwitchState = 0;
+    } else {
+        $("#dashboard").show()
+        SwitchState = 1;
+    }
+    
+}
 
 function dashboard (data) {
     const db = document.getElementById("dashboard");
