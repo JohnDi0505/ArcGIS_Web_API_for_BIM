@@ -23,10 +23,5 @@ function DashboardSwitch () {
 }
 
 function dashboard (data) {
-    const db = document.getElementById("dashboard");
-
-    var result = $("#dashboard").width();
-
-    console.log(db);
-    console.log(result);
+    // console.log(data)
 }

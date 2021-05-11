@@ -12,13 +12,15 @@ function scene_display() {
         "esri/widgets/Slice",
         "esri/widgets/Slice/SlicePlane",
         "esri/widgets/LayerList",
-        "esri/core/Collection"
+        "esri/core/Collection",
+        "esri/widgets/TimeSlider"
       ], (
         WebScene,
         SceneView,
         BuildingSceneLayer,
         Slice,
         SlicePlane,
+        TimeSlider,
         LayerList,
         Collection
       ) => {
@@ -29,11 +31,8 @@ function scene_display() {
           }
         });
   
-        const view = new SceneView({
-          container: "viewDiv",
-          map: webscene
-        });
-  
+        
+
         // Create the BuildingSceneLayer and add it to the webscene
         const buildingLayer = new BuildingSceneLayer({
           portalItem: {
@@ -48,8 +47,6 @@ function scene_display() {
         });
 
         view.ui.add("menu", "top-right");
-
-        // const excludedLayers = [];
 
         // sliceWidget.viewModel.excludedLayers.addMany(excludedLayers);
         const sliceButton = document.getElementById("slice");
